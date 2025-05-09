@@ -41,3 +41,10 @@ func (c *Client) Validate() error {
 	}
 	return nil
 }
+
+func (c *Client) Update(name, email string) error {
+	c.UpdatedAt = time.Now()
+	c.Name = name
+	c.Email = email
+	return c.Validate()
+}
