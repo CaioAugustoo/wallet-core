@@ -31,3 +31,28 @@ func TestCreateNewTransaction(t *testing.T) {
 	assert.NotEmpty(t, transaction.ID)
 	assert.NotEmpty(t, transaction.CreatedAt)
 }
+
+func TestCreateNewTransactionInvalide(t *testing.T) {
+	client1, err := NewClient("Caio", "caio@rocha.me")
+	assert.NoError(t, err)
+
+	accountFrom, err := NewAccount(client1)
+	assert.NoError(t, err)
+
+	client2, err := NewClient("Caio", "caio@rocha.me")
+	assert.NoError(t, err)
+
+	accountTo, err := NewAccount(client2)
+	assert.NoError(t, err)
+
+	accountFrom.Deposit(1000)
+
+	_, err = NewTransaction(accountFrom, accountTo, 0)
+	assert.Error(t, err)
+
+	_, err = NewTransaction(nil, accountTo, 0)
+	assert.Error(t, err)
+
+	_, err = NewTransaction(accountFrom, nil, 0)
+	assert.Error(t, err)
+}

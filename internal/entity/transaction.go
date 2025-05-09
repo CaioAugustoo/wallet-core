@@ -45,9 +45,6 @@ func (t *Transaction) Validate() error {
 }
 
 func (t *Transaction) Commit() error {
-	if err := t.AccountFrom.Withdraw(t.Amount); err != nil {
-		return err
-	}
 	t.AccountTo.Deposit(t.Amount)
-	return nil
+	return t.AccountFrom.Withdraw(t.Amount)
 }
