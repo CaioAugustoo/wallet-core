@@ -8,14 +8,16 @@ import (
 )
 
 const (
-	ErrNameIsEmpty  = "name is empty"
-	ErrEmailIsEmpty = "email is empty"
+	ErrNameIsEmpty                 = "name is empty"
+	ErrEmailIsEmpty                = "email is empty"
+	ErrAccountDoesntBelongToClient = "account does not belong to client"
 )
 
 type Client struct {
 	ID        string
 	Name      string
 	Email     string
+	Accounts  []Account
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -47,4 +49,13 @@ func (c *Client) Update(name, email string) error {
 	c.Name = name
 	c.Email = email
 	return c.Validate()
+}
+
+func (c *Client) AddAccount(account *Account) error {
+	if account.Client.ID != c.ID {
+		return errors.New(ErrAccountDoesntBelongToClient)
+	}
+
+	c.Accounts = append(c.Accounts, *account)
+	return nil
 }

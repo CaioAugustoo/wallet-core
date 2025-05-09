@@ -57,3 +57,16 @@ func TestUpdateClientWhenEmailIsEmpty(t *testing.T) {
 	err = client.Update("Caio", "")
 	assert.Error(t, err)
 }
+
+func TestAddAccount(t *testing.T) {
+	client, err := NewClient("Caio", "caio@rocha.me")
+	assert.NoError(t, err)
+
+	account, err := NewAccount(client)
+	assert.NoError(t, err)
+
+	err = client.AddAccount(account)
+	assert.NoError(t, err)
+
+	assert.Equal(t, len(client.Accounts), 1)
+}
