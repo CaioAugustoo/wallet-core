@@ -11,6 +11,7 @@ const (
 	ErrNameIsEmpty                 = "name is empty"
 	ErrEmailIsEmpty                = "email is empty"
 	ErrAccountDoesntBelongToClient = "account does not belong to client"
+	ErrClientNotFound              = "client not found"
 )
 
 type Client struct {
