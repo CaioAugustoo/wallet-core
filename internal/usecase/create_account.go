@@ -33,7 +33,7 @@ func NewCreateAccount(
 }
 
 func (uc *createAccount) Execute(input CreateAccountInput) (*CreateAccountOutput, error) {
-	client, err := uc.clientGateway.Get(input.ClientID)
+	client, err := uc.clientGateway.FindById(input.ClientID)
 	if err != nil {
 		return nil, err
 	}

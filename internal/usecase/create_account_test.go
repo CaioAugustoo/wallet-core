@@ -19,7 +19,7 @@ func TestCreateAccount(t *testing.T) {
 	clientID := uuid.NewString()
 
 	accountGateway.On("Save", mock.Anything).Return(nil)
-	clientGateway.On("Get", mock.Anything).Return(&entity.Client{
+	clientGateway.On("FindById", mock.Anything).Return(&entity.Client{
 		ID:    clientID,
 		Name:  "John Doe",
 		Email: "john@doe.com",
@@ -44,7 +44,7 @@ func TestCreateAccountClientGatewayError(t *testing.T) {
 
 	clientID := uuid.NewString()
 
-	clientGateway.On("Get", clientID).Return(&entity.Client{
+	clientGateway.On("FindById", clientID).Return(&entity.Client{
 		ID:    clientID,
 		Name:  "John Doe",
 		Email: "john@doe.com",
@@ -66,7 +66,7 @@ func TestCreateAcountAccountGatewayError(t *testing.T) {
 
 	clientID := uuid.NewString()
 
-	clientGateway.On("Get", clientID).Return(&entity.Client{
+	clientGateway.On("FindById", clientID).Return(&entity.Client{
 		ID:    clientID,
 		Name:  "John Doe",
 		Email: "john@doe.com",

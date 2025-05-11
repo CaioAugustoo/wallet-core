@@ -9,7 +9,7 @@ type ClientGatewayMock struct {
 	mock.Mock
 }
 
-func (m *ClientGatewayMock) Get(id string) (*entity.Client, error) {
+func (m *ClientGatewayMock) FindById(id string) (*entity.Client, error) {
 	args := m.Called(id)
 	return args.Get(0).(*entity.Client), args.Error(1)
 }
